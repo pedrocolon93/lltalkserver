@@ -7,6 +7,9 @@ app.use(logfmt.requestLogger());
 app.get('/', function(req, res) {
   res.send('Hello World!');
 });
+app.get('/search/:query', function(req, res){
+    res.send('Hello'+req.params.query);
+});
 
 var port = Number(process.env.PORT || 5000);
 app.listen(port, function() {
