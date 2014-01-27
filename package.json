@@ -1,18 +1,27 @@
 {
-  "name": "expressjs-static-boilerplate",
-  "version": "0.0.1",
-  "private": true,
+  "name": "lltalkserver",
+  "version": "0.0.0",
+  "description": "Web Server for LLTalk",
+  "main": "server.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "dependencies": {
-    "express": "3.2.3",
-    "nodemon": "0.7.8"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pedrocolon93/lltalkserver.git"
   },
-  "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-contrib-uglify": "~0.2.0",
-    "grunt-contrib-cssmin": "~0.6.0",
-    "grunt-contrib-watch": "~0.4.0"
+  "keywords": [
+    "lltalk",
+    "webserver"
+  ],
+  "author": "Pedro and Christian",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/pedrocolon93/lltalkserver/issues"
+  },
+  "dependencies": {
+    "express": "~3.4.8",
+    "logfmt": "~0.20.0"
   }
 }

@@ -1,21 +1,14 @@
-var express = require("express"),
-	app = express(),
-	port = process.env.PORT || 3000;
+var express = require("express");
+var logfmt = require("logfmt");
+var app = express();
 
-var pub = __dirname + '/public',
-	view = __dirname + '/views';
-   
-app.configure(function(){
-	app.use(express.bodyParser());
-	app.use(express.methodOverride());
-	app.use(app.router);
-	app.use(express.static(pub));
-	app.use(express.static(view));
-	app.use(express.errorHandler());
+app.use(logfmt.requestLogger());
+
+app.get('/', function(req, res) {
+  res.send('Hello World!');
 });
 
-app.get("/views", function(req, res) {
- 	res.render('index.html');
+var port = Number(process.env.PORT || 5000);
+app.listen(port, function() {
+  console.log("Listening on " + port);
 });
-
-app.listen(port);
