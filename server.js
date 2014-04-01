@@ -44,15 +44,21 @@ app.get('/', function(req, res) {
   res.send('Hello World!');
 });
 
+app.post('/upload/:name/:dim/:subdim/:lid/:location', function(req, res) {
+    //Method to upload and add to db
+});
+
 app.get('/search/:name/:dim/:subdim/:lid', function(req, res){
     console.log("Query is ");
     res.send('Hello '+req.params.query);
 });
+
 app.get('/search/:dim/:subdim/:lid', function(req, res){
     var query = "select * \
     from \"Talk\".\"Model\" \
     where model_dimension = "+req.params.dim+"\
         and model_sub_dimension = "+req.params.subdim+" and lid = "+req.params.lid;
+
     console.log("Query is "+ query);
 
     client.query(query, function(err, result) {
@@ -61,17 +67,14 @@ app.get('/search/:dim/:subdim/:lid', function(req, res){
         }
         //console.log(result.rows);
 
-        var list = new Array();
+        var list = [];
         for(var i=0;i<result.rows.length;i++)       {
             //console.log(result.rows[i]);
             list[i] = new Model(result.rows[i].model_name,result.rows[i].model_dimension, result.rows[i].model_sub_dimension,result.rows[i].lid, result.rows[i].file_location)  ;
         }
-
         console.log(list);
         res.json(list);
-
     });
-
 });
 
 
