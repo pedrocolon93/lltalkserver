@@ -55,10 +55,11 @@ app.get('/search/:dim/:subdim/:lid', function(req, res){
         model.find({model_dimension:dimension, model_sub_dimension:subdimension,lid:lid}).toArray(function (err, results) {
             console.log(results);
             var list = [];
-
+            var i =0;
             results.forEach(function (item) {
                 var model = new Model(item['model_name'],item['model_dimension'],item['model_sub_dimension'],item['lid'],item['file_location'])
                 list[i] = model;
+                i++;
             });
             console.log(list);
             res.json(list);
