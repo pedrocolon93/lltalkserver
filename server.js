@@ -4,6 +4,7 @@ var pg = require('pg');
 var app = express();
 var model = require("./model.js");
 var Model= model.Model;
+var MongoClient = require('mongodb').MongoClient;
 
 /*
 Init Code
@@ -17,25 +18,12 @@ app.listen(port, function() {
 });
 
 /*
-Postgresql DB Code
+Mongo DB Code
  */
-var conString = "postgres://postgres:tito12@@@localhost/LLTalk";
 
-var client = new pg.Client(conString);
-client.connect(function(err) {
-    if(err) {
-        return console.error('could not connect to postgres', err);
-    }
-    //Test query returns current time
-//    client.query('SELECT NOW() AS "theTime"', function(err, result) {
-//        if(err) {
-//            return console.error('error running query', err);
-//        }
-//        console.log(result.rows[0].theTime);
-//        //output: Tue Jan 15 2013 19:12:47 GMT-600 (CST)
-//        client.end();
-//    });
-});
+var uri = 'mongodb://pedro:tito1234@ds047057.mongolab.com:47057/lltalk';
+
+
 /*
 Server Code
  */
@@ -54,28 +42,34 @@ app.get('/search/:name/:dim/:subdim/:lid', function(req, res){
 });
 
 app.get('/search/:dim/:subdim/:lid', function(req, res){
-    var query = "select * \
-    from \"Talk\".\"Model\" \
-    where model_dimension = "+req.params.dim+"\
-        and model_sub_dimension = "+req.params.subdim+" and lid = "+req.params.lid;
+    MongoClient.connect(uri, function(err, db) {
 
-    console.log("Query is "+ query);
-
-    client.query(query, function(err, result) {
-        if(err) {
-            return console.error('error running query', err);
+        if (err) {
+            throw err;
         }
-        //console.log(result.rows);
+        var model = db.collection('Model');
+        var dimension = parseInt(req.params.dim);
+        var subdimension = parseInt(req.params.subdim);
+        var lid = stringtobool(req.params.lid.toUpperCase());
+        var modelList = [];
+        model.find({model_dimension:dimension, model_sub_dimension:subdimension,lid:lid}).toArray(function (err, results) {
+            console.log(results);
+            results.forEach(function (item) {
+                var model = new Model(item['model_name'],item['model_dimension'],item['model_sub_dimension'],item['lid'],item['file_location'])
+                modelList.push(model);
+            });
+            res.json(modelList);
+        })
 
-        var list = [];
-        for(var i=0;i<result.rows.length;i++)       {
-            //console.log(result.rows[i]);
-            list[i] = new Model(result.rows[i].model_name,result.rows[i].model_dimension, result.rows[i].model_sub_dimension,result.rows[i].lid, result.rows[i].file_location)  ;
-        }
-        console.log(list);
-        res.json(list);
     });
 });
 
 
+function stringtobool(string){
+    switch(string.toLowerCase()){
+        case "true": case "yes": case "1": return true;
+        case "false": case "no": case "0": case null: return false;
+        default: return Boolean(string);
+    }
+}
 
