@@ -1,9 +1,8 @@
 var express = require("express");
 var logfmt = require("logfmt");
-var pg = require('pg');
 var app = express();
 var model = require("./model.js");
-var Model= model.Model;
+var Model = model.Model;
 var MongoClient = require('mongodb').MongoClient;
 
 /*
@@ -43,7 +42,6 @@ app.get('/search/:name/:dim/:subdim/:lid', function(req, res){
 
 app.get('/search/:dim/:subdim/:lid', function(req, res){
     MongoClient.connect(uri, function(err, db) {
-
         if (err) {
             throw err;
         }
@@ -64,46 +62,8 @@ app.get('/search/:dim/:subdim/:lid', function(req, res){
             console.log(list);
             res.json(list);
         })
-
     });
 });
-//    client.query(query, function(err, result) {
-//        if(err) {
-//            return console.error('error running query', err);
-//        }
-//        //console.log(result.rows);
-//
-//        var list = [];
-//        for(var i=0;i<result.rows.length;i++)       {
-//            //console.log(result.rows[i]);
-//            list[i] = new Model(result.rows[i].model_name,result.rows[i].model_dimension, result.rows[i].model_sub_dimension,result.rows[i].lid, result.rows[i].file_location)  ;
-//        }
-//        console.log(list);
-//        res.json(list);
-//    });
-
-//    pg.connect(process.env.DATABASE_URL, function(err, client2) {
-////        var query = client2.query('SELECT * FROM your_table');
-////        query.on('row', function(row) {
-////            console.log(JSON.stringify(row));
-////        });
-//        client2.query(query, function(err, result) {
-//            if(err) {
-//                return console.error('error running query', err);
-//            }
-//            //console.log(result.rows);
-//
-//            var list = [];
-//            for(var i=0;i<result.rows.length;i++)       {
-//                //console.log(result.rows[i]);
-//                list[i] = new Model(result.rows[i].model_name,result.rows[i].model_dimension, result.rows[i].model_sub_dimension,result.rows[i].lid, result.rows[i].file_location)  ;
-//            }
-//            console.log(list);
-//            res.json(list);
-//        });
-//
-//    });
-
 
 function stringtobool(string){
     switch(string.toLowerCase()){
