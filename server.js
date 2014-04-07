@@ -54,15 +54,54 @@ app.get('/search/:dim/:subdim/:lid', function(req, res){
         var modelList = [];
         model.find({model_dimension:dimension, model_sub_dimension:subdimension,lid:lid}).toArray(function (err, results) {
             console.log(results);
+            var list = [];
+
             results.forEach(function (item) {
                 var model = new Model(item['model_name'],item['model_dimension'],item['model_sub_dimension'],item['lid'],item['file_location'])
-                modelList.push(model);
+                list[i] = model;
             });
-            res.json(modelList);
+            console.log(list);
+            res.json(list);
         })
 
     });
 });
+//    client.query(query, function(err, result) {
+//        if(err) {
+//            return console.error('error running query', err);
+//        }
+//        //console.log(result.rows);
+//
+//        var list = [];
+//        for(var i=0;i<result.rows.length;i++)       {
+//            //console.log(result.rows[i]);
+//            list[i] = new Model(result.rows[i].model_name,result.rows[i].model_dimension, result.rows[i].model_sub_dimension,result.rows[i].lid, result.rows[i].file_location)  ;
+//        }
+//        console.log(list);
+//        res.json(list);
+//    });
+
+//    pg.connect(process.env.DATABASE_URL, function(err, client2) {
+////        var query = client2.query('SELECT * FROM your_table');
+////        query.on('row', function(row) {
+////            console.log(JSON.stringify(row));
+////        });
+//        client2.query(query, function(err, result) {
+//            if(err) {
+//                return console.error('error running query', err);
+//            }
+//            //console.log(result.rows);
+//
+//            var list = [];
+//            for(var i=0;i<result.rows.length;i++)       {
+//                //console.log(result.rows[i]);
+//                list[i] = new Model(result.rows[i].model_name,result.rows[i].model_dimension, result.rows[i].model_sub_dimension,result.rows[i].lid, result.rows[i].file_location)  ;
+//            }
+//            console.log(list);
+//            res.json(list);
+//        });
+//
+//    });
 
 
 function stringtobool(string){
