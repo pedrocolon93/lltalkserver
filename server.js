@@ -36,8 +36,28 @@ app.post('/upload/:name/:dim/:subdim/:lid/:location', function(req, res) {
 });
 
 app.get('/search/:name/:dim/:subdim/:lid', function(req, res){
-    console.log("Query is ");
-    res.send('Hello '+req.params.query);
+    MongoClient.connect(uri, function(err, db) {
+        if (err) {
+            throw err;
+        }
+        var model = db.collection('Model');
+        var dimension = parseInt(req.params.dim);
+        var subdimension = parseInt(req.params.subdim);
+        var lid = stringtobool(req.params.lid.toUpperCase());
+        var modelList = [];
+        model.find({model_dimension:dimension, model_sub_dimension:subdimension,lid:lid, model_name:/req.params.name/}).toArray(function (err, results) {
+            console.log(results);
+            var list = [];
+            var i =0;
+            results.forEach(function (item) {
+                var model = new Model(item['model_name'],item['model_dimension'],item['model_sub_dimension'],item['lid'],item['file_location'])
+                list[i] = model;
+                i++;
+            });
+            console.log(list);
+            res.json(list);
+        })
+    });
 });
 
 app.get('/search/:dim/:subdim/:lid', function(req, res){
