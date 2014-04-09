@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="496ef02d-2c25-4592-a8ae-30f0e16098dd" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server.js" afterPath="$PROJECT_DIR$/server.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="lltalkserver.iws" />
@@ -29,8 +28,8 @@
       <file leaf-file-name="server.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6269165" vertical-offset="431" max-vertical-offset="1717">
-              <caret line="47" column="131" selection-start-line="47" selection-start-column="131" selection-end-line="47" selection-end-column="131" />
+            <state vertical-scroll-proportion="0.13458262" vertical-offset="499" max-vertical-offset="1717">
+              <caret line="34" column="4" selection-start-line="34" selection-start-column="4" selection-end-line="34" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -278,7 +277,11 @@
       <created>1397009835612</created>
       <updated>1397009835612</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Search by name">
+      <created>1397010627790</created>
+      <updated>1397010627790</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -631,8 +634,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6269165" vertical-offset="431" max-vertical-offset="1717">
-          <caret line="47" column="131" selection-start-line="47" selection-start-column="131" selection-end-line="47" selection-end-column="131" />
+        <state vertical-scroll-proportion="0.13458262" vertical-offset="499" max-vertical-offset="1717">
+          <caret line="34" column="4" selection-start-line="34" selection-start-column="4" selection-end-line="34" selection-end-column="36" />
           <folding />
         </state>
       </provider>
