@@ -45,7 +45,7 @@ app.get('/search/:name/:dim/:subdim/:lid', function(req, res){
         var subdimension = parseInt(req.params.subdim);
         var lid = stringtobool(req.params.lid.toUpperCase());
         var modelList = [];
-        model.find({model_dimension:dimension, model_sub_dimension:subdimension,lid:lid, model_name:/req.params.name/}).toArray(function (err, results) {
+        model.find({model_dimension:dimension, model_sub_dimension:subdimension,lid:lid, model_name:{"$regex":".*"+req.params.name+".*"}}).toArray(function (err, results) {
             console.log(results);
             var list = [];
             var i =0;
