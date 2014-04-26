@@ -32,7 +32,7 @@ app.get('/', function(req, res) {
 });
 
 app.post('/upload/:name/:dim/:subdim/:lid/:location', function(req, res) {
-    //Method to upload and add to db
+    //Method to upload and add to db missing
 });
 
 app.get('/search/:name/:dim/:subdim/:lid', function(req, res){
